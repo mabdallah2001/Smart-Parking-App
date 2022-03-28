@@ -9,13 +9,14 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { db } from '../firebase';
-import Subscription from '../pages/Subscription';
+import axios from 'axios';
 
 
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = ({navigation}) => {
 
+    const [owner, setOwner] = useState("");
 
     const [first, setFirst] = useState("");
 
@@ -29,31 +30,36 @@ const HomeScreen = ({navigation}) => {
     const [code, setCode] = useState("");
     const [plate, setPlate] = useState("");
 
-    const [flag, setFlag] = useState(true);
+    // const [rerender, setRerender] = useState(false);
+
+
+
 
     useEffect(() => {
-        // if(flag){
-            db.collection('Users').where('Email', '==', 'Hudamiran@hudhud.com').get().then(snapshot => {
-                snapshot.forEach(doc => {
-                    // console.log(doc.id, '=>', doc.data());
-                    setFirst(doc.get('FirstName'));
-                    setSubscription(doc.get("Subscription"));
-                    setBalance(doc.get('Balance'));
-                });
-            })
-            .catch(err => {
-                console.log('Error getting documents', err);}
-            );
-            // setFlag(false);
-        // }
-        
-        
-      }, [first, subscription, balance]);
+        axios.get("http://localhost:3000/receive-key").then(function(response){
+          setOwner(response.data);
+        });
+
+        db.collection('Users').where('Email', '==', owner).get().then(snapshot => {
+            snapshot.forEach(doc => {
+                // console.log(doc.id, '=>', doc.data());
+                setFirst(doc.get('FirstName'));
+                setSubscription(doc.get("Subscription"));
+                setBalance(doc.get('Balance'));
+            });
+        })
+        .catch(err => {
+            console.log('Error getting documents', err);}
+        );
+
+     
+
+      },[owner]);
+
+ 
 
       useEffect(() => {
-        if(flag){
-
-            db.collection('Car Registeration').where('Owner', '==', 'hudamiran@hudhud.com').get().then(snapshot => {
+            db.collection('Car Registeration').where('Owner', '==', owner).get().then(snapshot => {
                 snapshot.forEach(doc => {
                     setBrand(doc.get('Brand'));
                     setType(doc.get('Type'));
@@ -68,9 +74,7 @@ const HomeScreen = ({navigation}) => {
             .catch(err => {
                 console.log('Error getting documents', err);}
             );
-            setFlag(false);
-        }
-      }, [brand, type, model, emirate, code, plate]);
+      }, [owner]);
 
     return (
         <ScrollView>

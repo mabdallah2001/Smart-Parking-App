@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, Settings } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-element-dropdown';
 import { Input } from 'react-native-elements/dist/input/Input';
 import { db } from '../firebase';
+import axios from 'axios';
 
 
 
@@ -21,6 +22,7 @@ const CarRegScreen = ({navigation}) => {
     const [emirate, setEmirate] = useState("")
     const [code, setCode] = useState("")
     const [plate, setPlate] = useState("")
+    const [owner, setOwner] = useState("")
 
     const Emirates = [
         { label: 'Abu Dhabi', emirate: 'Abu Dhabi' },
@@ -31,6 +33,13 @@ const CarRegScreen = ({navigation}) => {
         { label: 'Ajman', emirate: 'Ajman' },
         { label: 'Umm Al Quwain', emirate: 'Umm Al Quwain' },
     ];
+
+    useEffect(() => {
+      axios.get("http://localhost:3000/receive-key").then(function(response){
+        setOwner(response.data);
+      })
+
+    },[]);
     
    
     const carRegister =() => {
@@ -42,7 +51,7 @@ const CarRegScreen = ({navigation}) => {
         Emirate: emirate,
         PlateCode: code,
         PlateNo: plate,
-        Owner: "hudamiran@hudhud.com"
+        Owner: owner
       }).then(navigation.reset({index: 0, routes:[{name: 'HomeNav'}]}));
     }
 
@@ -74,7 +83,7 @@ const CarRegScreen = ({navigation}) => {
             <Input placeholder='Plate Code' type='text' value={code} onChangeText={(text) => setCode(text)}/>
             <Input placeholder='Plate Number'  type='text' value={plate} onChangeText={(text) => setPlate(text)} />
             <View style={{marginBottom:130}}/>
-            <Button raised onPress = {carRegister} containerStyle={styles.button} title="Register" />
+            <Button raised onPress = {carRegister} containerStyle={styles.button} title="Register"/>
             
 
 

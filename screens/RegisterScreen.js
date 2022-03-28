@@ -4,13 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { StatusBar } from 'expo-status-bar';
 import { Input } from 'react-native-elements/dist/input/Input';
 import { auth, db } from '../firebase';
-
-
-
-
-
-
-
+import axios from 'axios';
 
 
 
@@ -55,11 +49,31 @@ const RegisterScreen = ({navigation}) => {
         Balance: 0
       });
 
-      // axios.post("http://localhost:3000/keyVal", email).then(() => {
-      //      //do something
-      //    }).catch(() => {
-      //       console.log("Something went wrong. Plase try again later");
-      //   });
+      // send email to backend using fetch:
+      // fetch("http://localhost:3000/send-key",{
+      //     method:"post",
+      //     headers:{
+      //         'Content-Type': 'application/json'
+      //     },
+      //     body:JSON. stringify({
+              
+      //       email: email
+              
+      //     })
+      // })
+      
+
+      // send email to backend using axios:
+      try{
+        axios.post("http://localhost:3000/send-key", {
+        email: email
+        });
+      }
+      catch (error){
+        console.log(error);
+      }
+
+      
     };
 
     return (
