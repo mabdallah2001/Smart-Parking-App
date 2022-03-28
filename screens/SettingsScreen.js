@@ -3,11 +3,14 @@ import { ScrollView, StyleSheet, Image, View } from 'react-native'
 import { Card, Title, Paragraph } from 'react-native-paper';
 import {Text} from 'react-native-elements'
 import {db} from '../firebase'
+import axios from 'axios';
 
 
 
 
 const SettingsScreen = ({navigation}) => {
+
+    const [owner, setOwner] = useState("");
 
     const [first,setFirst] = useState("");
     const [last,setLast] = useState("");
@@ -15,7 +18,12 @@ const SettingsScreen = ({navigation}) => {
 
 
     useEffect(() => {
-        db.collection('Users').where('Email', '==', 'Hudamiran@hudhud.com').get().then(snapshot => {
+
+        axios.get("http://localhost:3000/receive-key").then(function(response){
+            setOwner(response.data);
+          });
+
+        db.collection('Users').where('Email', '==', owner).get().then(snapshot => {
             snapshot.forEach(doc => {
                 // console.log(doc.id, '=>', doc.data());
                 setFirst(doc.get("FirstName"));
@@ -27,7 +35,7 @@ const SettingsScreen = ({navigation}) => {
           .catch(err => {
             console.log('Error getting documents', err);}
           );
-      });
+      }, [owner]);
 
     return (
         <ScrollView>
