@@ -28,6 +28,17 @@ const LoginScreen = ({navigation}) => {
             navigation.replace('HomeNav');
           })
           .catch((error) => alert(error));
+
+
+          try{
+            axios.post("http://localhost:3000/send-key", {
+            email: email
+            });
+          }
+          catch (error){
+            console.log(error);
+          }
+          
       };
 
     return (

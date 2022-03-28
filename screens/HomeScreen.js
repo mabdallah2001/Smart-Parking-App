@@ -19,7 +19,7 @@ const HomeScreen = ({navigation}) => {
     const [owner, setOwner] = useState("");
 
     const [first, setFirst] = useState("");
-
+    
     const [subscription, setSubscription] = useState("");
     const [balance, setBalance] = useState(0);
         
@@ -29,11 +29,6 @@ const HomeScreen = ({navigation}) => {
     const [emirate, setEmirate] = useState("");
     const [code, setCode] = useState("");
     const [plate, setPlate] = useState("");
-
-    // const [rerender, setRerender] = useState(false);
-
-
-
 
     useEffect(() => {
         axios.get("http://localhost:3000/receive-key").then(function(response){
