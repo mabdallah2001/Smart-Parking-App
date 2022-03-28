@@ -31,3 +31,12 @@ app.post("/create-payment-intent", async (req, res) => {
     res.json({ error: e.message });
   }
 });
+
+// app.post('/keyVal', (req, res) => {
+//   const data = [
+//     {req},
+//   ];
+
+//   res.json(data);
+//   console.log ( 'data = ', data);
+// });

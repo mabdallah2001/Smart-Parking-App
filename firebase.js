@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app';
 // import * as firebase from 'firebase/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+let first;
 
 const firebaseConfig = {
   apiKey: "AIzaSyDyPPegBy9TZ61ntG23dw1dBUgoLLkwTEQ",
@@ -25,6 +25,19 @@ if (firebase.apps.length === 0) {
 
 const db = app.firestore();
 const auth = firebase.auth();
+
+db.collection('Users').where('Email', '==', 'Hudamiran@hudhud.com').get().then(snapshot => {
+  snapshot.forEach(doc => {
+      // console.log(doc.id, '=>', doc.data());
+      first = doc.get("FirstName");
+      console.log(first);
+
+  });
+})
+.catch(err => {
+  console.log('Error getting documents', err);}
+);
+
 
 export { db, auth };
 

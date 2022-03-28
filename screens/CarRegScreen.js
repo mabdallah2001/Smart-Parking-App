@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, Settings } from 'react-na
 import { Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-element-dropdown';
 import { Input } from 'react-native-elements/dist/input/Input';
+import { db } from '../firebase';
+
 
 
 
@@ -11,7 +13,7 @@ import { Input } from 'react-native-elements/dist/input/Input';
 
 
 const CarRegScreen = ({navigation}) => {
-
+    
     const [brand, setBrand] = useState("")
     const [type, setType] = useState("")
     const [model, setModel] = useState("")
@@ -31,7 +33,18 @@ const CarRegScreen = ({navigation}) => {
     ];
     
    
-
+    const carRegister =() => {
+      db.collection('Car Registeration').add({
+        Brand: brand,
+        Type: type,
+        Model: model,
+        Color: color,
+        Emirate: emirate,
+        PlateCode: code,
+        PlateNo: plate,
+        Owner: "hudamiran@hudhud.com"
+      }).then(navigation.reset({index: 0, routes:[{name: 'HomeNav'}]}));
+    }
 
      
     return (
@@ -61,7 +74,7 @@ const CarRegScreen = ({navigation}) => {
             <Input placeholder='Plate Code' type='text' value={code} onChangeText={(text) => setCode(text)}/>
             <Input placeholder='Plate Number'  type='text' value={plate} onChangeText={(text) => setPlate(text)} />
             <View style={{marginBottom:130}}/>
-            <Button raised onPress = {() => navigation.reset({index: 0, routes:[{name: 'HomeNav'}]})} containerStyle={styles.button} title="Register" />
+            <Button raised onPress = {carRegister} containerStyle={styles.button} title="Register" />
             
 
 

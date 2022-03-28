@@ -3,14 +3,20 @@ import { StyleSheet, Text, Button, KeyboardAvoidingView} from 'react-native'
 import { Dropdown } from 'react-native-element-dropdown';
 import { StatusBar } from 'expo-status-bar';
 import { Input } from 'react-native-elements/dist/input/Input';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+
+
+
+
+
 
 
 
 
 
 const RegisterScreen = ({navigation}) => {
-    const [name, setName] = useState("")
+    const [fname, setFname] = useState("")
+    const [lname, setLname] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
@@ -24,13 +30,14 @@ const RegisterScreen = ({navigation}) => {
         { label: 'Visitor', occ: 'Visitor' },
       ];
 
+    
       
 
     const register = () => {
       auth.createUserWithEmailAndPassword(email,password)
       .then((userCredentials)=>{
         userCredentials.user.updateProfile({
-          displayName: name,
+          displayName: fname,
           phoneNumber: phone,
         }).then(()=> {
           navigation.replace('Car Registeration');
@@ -38,6 +45,21 @@ const RegisterScreen = ({navigation}) => {
       })
       .catch((error) => alert(error.message));
 
+      db.collection('Users').add({
+        Email: email,
+        FirstName: fname,
+        LastName: lname,
+        Occupation: occ,
+        PhoneNo: phone,
+        Subscription: 'Bronze',
+        Balance: 0
+      });
+
+      // axios.post("http://localhost:3000/keyVal", email).then(() => {
+      //      //do something
+      //    }).catch(() => {
+      //       console.log("Something went wrong. Plase try again later");
+      //   });
     };
 
     return (
@@ -46,7 +68,8 @@ const RegisterScreen = ({navigation}) => {
             <Text style={{marginBottom:50, marginTop:20, marginLeft:12}}>Create a Smart Parking account</Text>
 
 
-            <Input placeholder='Full Name' autofocus type='text' value={name} onChangeText={(text) => setName(text)}/> 
+            <Input placeholder='First Name' autofocus type='text' value={fname} onChangeText={(text) => setFname(text)}/> 
+            <Input placeholder='Last Name' autofocus type='text' value={lname} onChangeText={(text) => setLname(text)}/> 
             <Input placeholder='Email' type='text' value={email} onChangeText={(text) => setEmail(text)}/>
             <Input placeholder='Password' secureTextEntry type='text' value={password} onChangeText={(text) => setPassword(text)}/> 
             <Input placeholder='Phone Number' type='text' value={phone} onChangeText={(text) => setPhone(text)}/>
@@ -66,7 +89,6 @@ const RegisterScreen = ({navigation}) => {
                 setOcc(item.occ);
             }}
             />
-
             <Button onPress={register} containerStyle={styles.button} title="Next >" />
             
             {/* () => navigation.navigate('Car Registeration') */}
@@ -86,7 +108,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         width:370,
         marginLeft: 10,
-        marginBottom: 250,
+        marginBottom: 200,
       },
       label: {
         position: 'absolute',
