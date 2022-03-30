@@ -14,7 +14,7 @@ const CounterScreen = ({navigation}) => {
     const [FP1, setFP1] = useState(0);
     const [FP2, setFP2] = useState(0);
 
-    const [render,rerender] = useState(false);
+
 
 
 
