@@ -46,5 +46,4 @@ app.post("/send-key",  async (req, res) => {
 
 app.get("/receive-key",  async (req, res) => {
   res.send(key);
-  console.log(key);
 });

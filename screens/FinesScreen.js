@@ -6,7 +6,7 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 
 
 const FinesScreen = () => {
-    const [fine, setFine] = useState(false)
+    const [fine, setFine] = useState(true)
     
     return (
         fine?

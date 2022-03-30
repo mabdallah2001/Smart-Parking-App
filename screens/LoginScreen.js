@@ -3,7 +3,7 @@ import { StyleSheet, View, KeyboardAvoidingView} from 'react-native'
 import { Button, Input, Image } from 'react-native-elements'
 import { StatusBar } from 'expo-status-bar';
 import { auth } from '../firebase';
-
+import axios from 'axios';
  
 
 const LoginScreen = ({navigation}) => {
