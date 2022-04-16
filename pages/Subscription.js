@@ -1,7 +1,8 @@
 import { StyleSheet, View , Image, ScrollView} from 'react-native';
 import {Text, Button} from 'react-native-elements'
 import React, {useState, useEffect} from 'react';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph, RadioButton } from 'react-native-paper';
+import axios from 'axios'
 
 
 
@@ -9,10 +10,85 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 const Subscription = ({navigation}) => {
 
   const [subscription, setSubscription] = useState('Bronze');
-  
+  const [amount, setAmount] = useState("");
+
+
+  const [bronze, setBronze] = useState(false);
+  const [silver, setSilver] = useState(false);
+  const [gold, setGold] = useState(false);
+  const [plat, setPlat] = useState(false);
+  const [diamond, setDiamond] = useState(false);
+
+
+  const BronzeFunc = () => {
+    setSubscription('Bronze');
+    setAmount('0');
+    setBronze(!bronze);
+    setSilver(false);
+    setGold(false);
+    setPlat(false);
+    setDiamond(false);
+  };
+  const SilverFunc = () => {
+    setSubscription('Silver');
+    setAmount("12");
+    setBronze(false);
+    setSilver(!silver);
+    setGold(false);
+    setPlat(false);
+    setDiamond(false);
+  };
+  const GoldFunc = () => {
+    setSubscription('Gold');
+    setAmount('40');
+    setBronze(false);
+    setSilver(false);
+    setGold(!gold);
+    setPlat(false);
+    setDiamond(false);
+    console.log(amount);
+  };
+  const PlatFunc = () => {
+    setSubscription('Plat');
+    setAmount('150');
+    setBronze(false);
+    setSilver(false);
+    setGold(false);
+    setPlat(!plat);
+    setDiamond(false);
+  };
+  const DiamondFunc = () => {
+    setSubscription('Diamond');
+    setAmount('280');
+    setBronze(false);
+    setSilver(false);
+    setGold(false);
+    setPlat(false);
+    setDiamond(!diamond);
+  };
     // useEffect(() => {
-    //   console.log(subscription);
+    //   try{
+    //     axios.post("http://localhost:3000/send-amount", {
+    //     amount: amount
+    //     });
+    //   }
+    //   catch (error){
+    //     console.log(error);
+    //   }
+
     // }, []);
+
+    const next = () => {
+      try{
+        axios.post("http://localhost:3000/send-amount", {
+        amount: amount
+        });
+      }
+      catch (error){
+        console.log(error);
+      };
+      navigation.navigate('Payment');
+    };
 
 
   return (
@@ -32,27 +108,38 @@ const Subscription = ({navigation}) => {
 
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
 
-                <Card onPress={() => setSubscription('Bronze')} style={[styles.cards, {backgroundColor:'#CD7F32'}]}>
+                <Card onPress={BronzeFunc} style={[styles.cards, {backgroundColor: bronze? "#2C6BED" :'#CD7F32'}]}>
                     <Card.Content>
                       <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Bronze</Text>
                         <Text style={{color:'black', fontSize:12}}>Free Parking Subscription</Text>
                         <Text style={{color:'black', fontSize:10, marginTop:45,}}>AED 0</Text>
                         <Text></Text>
+                        {/* <RadioButton value="Bronze"
+                          status={ subscription === 'Bronze' ? 'checked' : 'unchecked' }
+                          onPress={() => setSubscription('Bronze')}
+                        />
+                        <RadioButton/>
+                        status={ subscription === 'Silver' ? 'checked' : 'unchecked'}
+                         */}
                     </Card.Content>
                 </Card>
 
-                <Card onPress={() => setSubscription('Silver')} style={[styles.cards, {backgroundColor:'silver'}]}>
+                <Card onPress={SilverFunc} style={[styles.cards, { backgroundColor: silver ? "#2C6BED" : 'silver'}]} >
+        
                     <Card.Content>
                       <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Silver</Text>
                         <Text style={{color:'black', fontSize:12}}>Weekly Based Subscription</Text>
                         <Text style={{color:'black', fontSize:10, marginTop:45,}}>AED 12</Text>
                         <Text></Text>
+                        
+                       
                     </Card.Content>
+
                 </Card>
 
-                <Card onPress={() => setSubscription('Gold')} style={[styles.cards, {backgroundColor:'gold'}]}>
+                <Card onPress={GoldFunc} style={[styles.cards, {backgroundColor: gold? "#2C6BED" : 'gold'}]}>
                     <Card.Content>
                       <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Gold</Text>
@@ -62,7 +149,7 @@ const Subscription = ({navigation}) => {
                     </Card.Content>
                 </Card>
 
-                <Card onPress={() => setSubscription('Platinum')} style={[styles.cards, {backgroundColor:'#E5E4E2'}]}>
+                <Card onPress={PlatFunc} style={[styles.cards, {backgroundColor: plat? "#2C6BED":'#E5E4E2'}]}>
                     <Card.Content>
                       <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Platinum</Text>
@@ -72,7 +159,7 @@ const Subscription = ({navigation}) => {
                     </Card.Content>
                 </Card>
 
-                <Card  onPress={() => setSubscription('Diamond')} style={[styles.cards, {backgroundColor:'#b9f2ff'}]}>
+                <Card  onPress={DiamondFunc} style={[styles.cards, {backgroundColor: diamond? "#2C6BED" : '#b9f2ff'}]}>
                     <Card.Content>
                       <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
                         <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Diamond</Text>
@@ -84,7 +171,7 @@ const Subscription = ({navigation}) => {
 
               </ScrollView>
 
-            <Button buttonStyle={styles.button} onPress={() => navigation.navigate('Payment')} title={"Next >"}></Button>
+            <Button buttonStyle={styles.button} onPress={next} title={"Next >"}></Button>
 
 
       </View>

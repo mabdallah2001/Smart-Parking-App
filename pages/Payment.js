@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { View, Text, StyleSheet, TextInput, Alert , Image} from "react-native";
 import {Button} from "react-native-elements";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
+import axios from "axios";
 
 
 
@@ -9,17 +10,25 @@ import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 //ADD localhost address of your server
 const API_URL = "http://localhost:3000";
 
-const Payment = props => {
-  // const [email, setEmail] = useState();
+const Payment = ({navigation}) => {
+  const [amount, setAmount] = useState();
+  const [tax, setTax] = useState();
+  const [total, setTotal] = useState();
+
+
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
 
 
+  useEffect(() => {
+    axios.get("http://localhost:3000/receive-amount").then(function(response){
 
-//   useEffect(()=>{
-//     props.navigation.setOptions({ headerStyle: {backgroundColor: "black"} })
-// },[]);
+      setAmount(parseFloat(response.data*0.95).toFixed(2));
+      setTax(parseFloat(response.data*0.05).toFixed(2));
+      setTotal(parseFloat(response.data).toFixed(2));
 
+    });
+  },[]);
  
 
   const fetchPaymentIntentClientSecret = async () => {
@@ -58,6 +67,7 @@ const Payment = props => {
         } else if (paymentIntent) {
           alert("Payment Successful");
           console.log("Payment successful ", paymentIntent);
+          navigation.reset({index: 0, routes:[{name: 'HomeNav'}]});
         }
       }
     } catch (e) {
@@ -101,18 +111,18 @@ const Payment = props => {
       <View style={{marginTop:'-40%'}}>
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
           <Text>Subtotal {"\n"}</Text>
-          <Text style={{marginLeft:'60%'}}>AED 142.50 {"\n"}</Text>
+          <Text style={{marginLeft:'60%'}}>AED {amount} {"\n"}</Text>
         </View>
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
         <Text>Tax {"\n"}{"\n"}</Text>
-        <Text style={{marginLeft:'74%'}}>AED 7.50</Text>
+        <Text style={{marginLeft:'72%'}}>AED {tax}</Text>
 
         </View>
 
         <View style={{flexDirection:'row', flexWrap:'wrap'}}>
 
         <Text style={{fontWeight:'bold', fontSize:20}}>Total</Text>
-        <Text style={{marginLeft:'54%', fontWeight:'bold', fontSize:20}}>AED 150.00</Text>
+        <Text style={{marginLeft:'54%', fontWeight:'bold', fontSize:20}}>AED {total}</Text>
 
         </View>
 
@@ -129,6 +139,7 @@ const Payment = props => {
     </View>
   );
 };
+
 export default Payment;
 
 const styles = StyleSheet.create({

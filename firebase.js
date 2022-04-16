@@ -26,18 +26,6 @@ if (firebase.apps.length === 0) {
 const db = app.firestore();
 const auth = firebase.auth();
 
-db.collection('Users').where('Email', '==', 'Hudamiran@hudhud.com').get().then(snapshot => {
-  snapshot.forEach(doc => {
-      // console.log(doc.id, '=>', doc.data());
-      first = doc.get("FirstName");
-      console.log(first);
-
-  });
-})
-.catch(err => {
-  console.log('Error getting documents', err);}
-);
-
 
 export { db, auth };
 

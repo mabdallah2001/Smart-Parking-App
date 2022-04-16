@@ -1,16 +1,33 @@
 import { StyleSheet, View , Image, ScrollView} from 'react-native';
 import {Text, Button} from 'react-native-elements'
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Counter from "react-native-counters";
+import axios from 'axios';
 
 
 
 const Funds = ({navigation}) => {
 
+  const [amount, setAmount] = useState('');
+
+
   const onChange = (number, type) => {
-    // console.log(number, type) // 1, + or -
+    setAmount(number);
   };
+
+  const next = () => {
+    try{
+      axios.post("http://localhost:3000/send-amount", {
+      amount: String(amount)
+      });
+    }
+    catch (error){
+      console.log(error);
+    };
+    navigation.navigate('Payment');
+  };
+
   return (
     <ScrollView>
       <View>
@@ -28,7 +45,7 @@ const Funds = ({navigation}) => {
           <Counter  max={100}  onChange={onChange.bind(this)}/>
         </View>
         <Text style={{marginTop:150, margin:10}}>Please Note: Every paid parking visit will deduct AED 4 from your current balance</Text>
-        <Button buttonStyle={styles.button} title={"Next >"} onPress={() => navigation.navigate('Payment')}></Button>
+        <Button buttonStyle={styles.button} title={"Next >"} onPress={next}></Button>
 
       </View>
     </ScrollView>

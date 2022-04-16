@@ -30,6 +30,7 @@ const HomeScreen = ({navigation}) => {
     const [code, setCode] = useState("");
     const [plate, setPlate] = useState("");
 
+ 
     useEffect(() => {
         axios.get("http://localhost:3000/receive-key").then(function(response){
           setOwner(response.data);
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
        backgroundColor:'white',
        borderRadius: 10,
        marginTop:50,
+       marginLeft: 25,
 
     //    alignSelf:'center',
     },

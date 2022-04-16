@@ -12,6 +12,7 @@ import bodyParser from 'body-parser';
 const stripe = Stripe(SECRET_KEY, { apiVersion: "2020-08-27" });
 
 let key;
+let payment;
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
@@ -20,11 +21,10 @@ app.listen(port, () => {
 app.post("/create-payment-intent", async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099, //lowest denomination of particular currency
+      amount: parseFloat(payment)*100, //lowest denomination of particular currency
       currency: "aed",
       payment_method_types: ["card"], //by default
     });
-
     const clientSecret = paymentIntent.client_secret;
 
     res.json({
@@ -46,4 +46,17 @@ app.post("/send-key",  async (req, res) => {
 
 app.get("/receive-key",  async (req, res) => {
   res.send(key);
+});
+
+// payment amount
+app.post("/send-amount",  async (req, res) => {
+  let {amount} = req.body;
+  payment = amount;
+  console.log(payment);
+});
+
+
+
+app.get("/receive-amount",  async (req, res) => {
+  res.send(payment);
 });
