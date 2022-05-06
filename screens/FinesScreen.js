@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Image, ScrollView, TextInputComponent } from 'react-native'
-import { Text } from 'react-native-elements'
+import { Text, Button } from 'react-native-elements'
 import { Card, Title, Paragraph } from 'react-native-paper';
 import {db} from '../firebase';
 import axios from 'axios';
 
 
 
-const FinesScreen = () => {
+const FinesScreen = ({navigation}) => {
     const [fine, setFine] = useState(false)
     const [owner, setOwner] = useState("");
 
@@ -24,7 +24,6 @@ const FinesScreen = () => {
     const [hour, setHour] = useState();
     const [minute, setMinute] = useState();
     const [AMPM, setAMPM] = useState();
-
 
     const [render, rerender] = useState(false);
 
@@ -105,7 +104,7 @@ const FinesScreen = () => {
         );
 
 
-        console.log(tickNo);
+        // console.log(tickNo);
         if(amount === undefined){
             setFine(false)
         }
@@ -115,10 +114,36 @@ const FinesScreen = () => {
 
         setTimeout(() => {
             rerender(!render);
-        }, 5000);
+        }, 2000);
 
 
     },[render]);
+
+    const payFine = () => {
+
+        let total = (tickNo.length * 50).toString()
+        try{
+            axios.post("http://localhost:3000/send-amount", {
+            amount: total
+            });
+        }
+        catch (error){
+            console.log(error);
+        };
+
+        try{
+            axios.post("http://localhost:3000/send-subs", {
+            subs: "fines"
+            });
+          }
+          catch (error){
+            console.log(error);
+          };
+
+
+        navigation.navigate('Payment');
+    
+    };
 
 
     const Fines = () => {
@@ -186,6 +211,11 @@ const FinesScreen = () => {
         fine?
         <ScrollView> 
             {Fines()}
+            <View style={{flexDirection:'row', flexWrap:'wrap', marginLeft: 30, marginTop: 30}}>
+                <Text style={{fontWeight:'bold', fontSize:20}}>Total</Text>
+                <Text style={{marginLeft:'54%', fontWeight:'bold', fontSize:20}}>AED {tickNo.length*50}</Text>
+            </View>
+            <Button buttonStyle={styles.button} onPress={payFine} title={"Pay Fines"}></Button>
         </ScrollView>
         :
         <View style={{alignSelf:'center', top:'35%'}}>
@@ -217,5 +247,18 @@ const styles = StyleSheet.create({
         marginLeft:50,
         marginRight:50,
         marginTop:2,
+      },
+      button:{
+        width:'50%',
+        alignSelf:'center',
+        marginTop:50,
+        marginBottom:50,
+        borderRadius:10,
+        backgroundColor: "#2C6BED",
+      },
+      total:{
+          fontSize: 20,
+          fontWeight: "bold",
+          marginLeft: 30
       }
 })

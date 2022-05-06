@@ -21,7 +21,7 @@ const HomeScreen = ({navigation}) => {
     const [first, setFirst] = useState("");
     
     const [subscription, setSubscription] = useState("");
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState(0.00);
         
     const [brand, setBrand] = useState("");
     const [type, setType] = useState("");
@@ -50,7 +50,7 @@ const HomeScreen = ({navigation}) => {
 
      
 
-      },[owner]);
+      },[owner,subscription,balance]);
 
  
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
        backgroundColor:'white',
        borderRadius: 10,
        marginTop:50,
-       marginLeft: 25,
+       marginLeft: 30,
 
     //    alignSelf:'center',
     },

@@ -13,6 +13,7 @@ const stripe = Stripe(SECRET_KEY, { apiVersion: "2020-08-27" });
 
 let key;
 let payment;
+let subscription;
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
@@ -53,10 +54,25 @@ app.post("/send-amount",  async (req, res) => {
   let {amount} = req.body;
   payment = amount;
   console.log(payment);
+
 });
 
 
 
 app.get("/receive-amount",  async (req, res) => {
   res.send(payment);
+});
+
+//Subscription
+
+app.post("/send-subs",  async (req, res) => {
+  let {subs} = req.body;
+  subscription = subs;
+
+});
+
+
+app.get("/receive-subs",  async (req, res) => {
+  res.send(subscription);
+
 });

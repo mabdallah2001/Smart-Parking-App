@@ -1,15 +1,37 @@
 import { StyleSheet, View , Image, ScrollView} from 'react-native';
 import {Text, Button} from 'react-native-elements'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import Counter from "react-native-counters";
 import axios from 'axios';
+import {db} from '../firebase';
 
 
 
 const Funds = ({navigation}) => {
 
   const [amount, setAmount] = useState('');
+  const [owner, setOwner] = useState('');
+  const [balance, setBalance] = useState();
+
+  
+  useEffect(() => {
+    axios.get("http://localhost:3000/receive-key").then(function(response){
+      setOwner(response.data);
+    });
+
+    db.collection('Users').where('Email', '==', owner).get().then(snapshot => {
+      snapshot.forEach(doc => {
+          setBalance(doc.get('Balance'));
+      });
+    })
+    .catch(err => {
+        console.log('Error getting documents', err);}
+    );
+
+    
+
+  },[owner]);
 
 
   const onChange = (number, type) => {
@@ -25,6 +47,16 @@ const Funds = ({navigation}) => {
     catch (error){
       console.log(error);
     };
+
+    try{
+      axios.post("http://localhost:3000/send-subs", {
+      subs: 'balance'
+      });
+    }
+    catch (error){
+      console.log(error);
+    };
+
     navigation.navigate('Payment');
   };
 
@@ -36,7 +68,7 @@ const Funds = ({navigation}) => {
           <Card.Content>
           <Image style={{height:30, width:30, alignSelf:'flex-end',}} source={require('../icons/funds.png')}/>
           <Text style={{color:'white', fontSize:12, marginTop:10}}>Your Balance</Text>
-          <Text style={{color:'white', fontWeight:'bold', fontSize:25, marginTop:-1,}}>AED 10.00</Text>
+          <Text style={{color:'white', fontWeight:'bold', fontSize:25, marginTop:-1,}}>AED {balance}.00</Text>
           </Card.Content>
         </Card>
         <Text style={{marginTop:50, left:5, fontSize:20}}>Add Funds:</Text>

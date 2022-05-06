@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text, View , Image} from 'react-native';
+import { StyleSheet, Text, View , Image, LogBox} from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import CarRegScreen from './screens/CarRegScreen';
@@ -36,6 +36,7 @@ import {StripeProvider} from '@stripe/stripe-react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+LogBox.ignoreAllLogs();
 
 
 const Stack = createNativeStackNavigator();

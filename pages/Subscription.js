@@ -1,8 +1,9 @@
 import { StyleSheet, View , Image, ScrollView} from 'react-native';
 import {Text, Button} from 'react-native-elements'
 import React, {useState, useEffect} from 'react';
-import { Card, Title, Paragraph, RadioButton } from 'react-native-paper';
+import { Card, Title, Paragraph } from 'react-native-paper';
 import axios from 'axios'
+import {db} from '../firebase';
 
 
 
@@ -18,6 +19,10 @@ const Subscription = ({navigation}) => {
   const [gold, setGold] = useState(false);
   const [plat, setPlat] = useState(false);
   const [diamond, setDiamond] = useState(false);
+
+  const [owner, setOwner] = useState('');
+  const [current, setCurrent] = useState();
+  const [message, setMessage] = useState();
 
 
   const BronzeFunc = () => {
@@ -49,7 +54,7 @@ const Subscription = ({navigation}) => {
     console.log(amount);
   };
   const PlatFunc = () => {
-    setSubscription('Plat');
+    setSubscription('Platinum');
     setAmount('150');
     setBronze(false);
     setSilver(false);
@@ -66,22 +71,53 @@ const Subscription = ({navigation}) => {
     setPlat(false);
     setDiamond(!diamond);
   };
-    // useEffect(() => {
-    //   try{
-    //     axios.post("http://localhost:3000/send-amount", {
-    //     amount: amount
-    //     });
-    //   }
-    //   catch (error){
-    //     console.log(error);
-    //   }
+    useEffect(() => {
+      axios.get("http://localhost:3000/receive-key").then(function(response){
+        setOwner(response.data);
+      });
 
-    // }, []);
+      db.collection('Users').where('Email', '==', owner).get().then(snapshot => {
+          snapshot.forEach(doc => {
+              setCurrent(doc.get("Subscription"));
+          });
+      })
+      .catch(err => {
+          console.log('Error getting documents', err);}
+      );
+
+    },[owner, current]);
+
+    useEffect(() => {
+      if(current === 'Bronze'){
+        setMessage('Free Parking Subscription');
+      }
+      else if (current === 'Silver'){
+        setMessage('Weekly Based Subscription');
+      }
+      else if (current === 'Gold'){
+        setMessage('Monthly Based Subscription');
+      }
+      else if (current === 'Platinum'){
+        setMessage('Semester Based Subscription');
+      }
+      else if (current === 'Diamond'){
+        setMessage('Yearly Based Subscription');
+      }
+    },[current]);
 
     const next = () => {
       try{
         axios.post("http://localhost:3000/send-amount", {
         amount: amount
+        });
+      }
+      catch (error){
+        console.log(error);
+      };
+
+      try{
+        axios.post("http://localhost:3000/send-subs", {
+        subs: subscription
         });
       }
       catch (error){
@@ -95,11 +131,11 @@ const Subscription = ({navigation}) => {
     <ScrollView>
       <View>
       <Text  style={{top:10, left:5, fontSize:20}}>Current Subscription:</Text>
-      <Card style={[styles.cardfst,{backgroundColor:'#CD7F32'}]}>
+      <Card style={[styles.cardfst,{backgroundColor:'white'}]}>
           <Card.Content>
             <Image style={{height:25, width:25, alignSelf:'flex-end',}} source={require('../icons/subscription.png')}/>
-              <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>Bronze</Text>
-              <Text style={{color:'black', fontSize:12}}>Free Parking Subscription</Text>
+              <Text style={{color:'black', fontWeight:'bold', fontSize:35,}}>{current}</Text>
+              <Text style={{color:'black', fontSize:12}}>{message}</Text>
               <Text style={{color:'black', fontSize:10, marginTop:45,}}>Expires: 08/02/2023</Text>
 
           </Card.Content>
@@ -115,13 +151,6 @@ const Subscription = ({navigation}) => {
                         <Text style={{color:'black', fontSize:12}}>Free Parking Subscription</Text>
                         <Text style={{color:'black', fontSize:10, marginTop:45,}}>AED 0</Text>
                         <Text></Text>
-                        {/* <RadioButton value="Bronze"
-                          status={ subscription === 'Bronze' ? 'checked' : 'unchecked' }
-                          onPress={() => setSubscription('Bronze')}
-                        />
-                        <RadioButton/>
-                        status={ subscription === 'Silver' ? 'checked' : 'unchecked'}
-                         */}
                     </Card.Content>
                 </Card>
 

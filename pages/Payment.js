@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, Alert , Image} from "react-native";
 import {Button} from "react-native-elements";
 import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import axios from "axios";
+import {db} from '../firebase';
 
 
 
@@ -14,7 +15,9 @@ const Payment = ({navigation}) => {
   const [amount, setAmount] = useState();
   const [tax, setTax] = useState();
   const [total, setTotal] = useState();
-
+  const [owner, setOwner] = useState();
+  const [subscription, setSubscription] = useState()
+  const [balance, setBalance] = useState(0);
 
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
@@ -26,9 +29,20 @@ const Payment = ({navigation}) => {
       setAmount(parseFloat(response.data*0.95).toFixed(2));
       setTax(parseFloat(response.data*0.05).toFixed(2));
       setTotal(parseFloat(response.data).toFixed(2));
-
+      setBalance(parseInt(response.data));
     });
+
+    axios.get("http://localhost:3000/receive-key").then(function(response){
+      setOwner(response.data);
+    });
+
+    axios.get("http://localhost:3000/receive-subs").then(function(response){
+      setSubscription(response.data);
+    });
+
   },[]);
+
+  
  
 
   const fetchPaymentIntentClientSecret = async () => {
@@ -67,6 +81,57 @@ const Payment = ({navigation}) => {
         } else if (paymentIntent) {
           alert("Payment Successful");
           console.log("Payment successful ", paymentIntent);
+          console.log(subscription);
+          if(subscription === 'balance')
+          {
+            let oldB;
+
+            db.collection('Users').where('Email', '==', owner).get().then(snapshot => {
+              snapshot.forEach(doc => {
+                  oldB = parseInt( doc.get('Balance') );
+                  
+              });
+            })
+            .catch(err => {
+                console.log('Error getting documents', err);}
+            );
+            
+          
+            db.collection("Users")
+            .where("Email", "==", owner)
+            .get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(document) {
+                
+                  document.ref.update({Balance: oldB+balance}); 
+                
+              });
+            });
+          }
+          else if (subscription === "fines"){
+
+            db.collection("Fines")
+            .where("Owner", "==", owner)
+            .get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(document) {
+              document.ref.delete(); 
+              });
+            });
+
+          }
+          else{
+            db.collection("Users")
+            .where("Email", "==", owner)
+            .get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(document) {
+              document.ref.update({Subscription: subscription}); 
+              });
+            });
+          }
+          // db.collection("Users").where('Email', '==', owner).update({Subscription: "Gold"});
+
           navigation.reset({index: 0, routes:[{name: 'HomeNav'}]});
         }
       }

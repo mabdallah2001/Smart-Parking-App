@@ -45,9 +45,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Sports Complex</Title>
                         <Paragraph>Counter: {sComplex}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'280%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
                 </Card>
                 <Card style={styles.card} onPress={() => navigation.navigate('Student Center')}>
@@ -57,9 +57,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Student Center</Title>
                         <Paragraph>Counter: {sCenter}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'280%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
@@ -71,9 +71,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Physics</Title>
                         <Paragraph>Counter: {physics}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'510%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
@@ -86,9 +86,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>School of Business</Title>
                         <Paragraph>Counter: {SBA}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'140%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
@@ -103,9 +103,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Library</Title>
                         <Paragraph>Counter: {lib}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'550%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
@@ -119,9 +119,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Free Parking 1</Title>
                         <Paragraph>Counter: {FP1}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'320%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
@@ -132,9 +132,9 @@ const CounterScreen = ({navigation}) => {
                         <Title>Free Parking 2</Title>
                         <Paragraph>Counter: {FP2}</Paragraph>
                     </Card.Content>
-                    <Card.Content>
+                    {/* <Card.Content>
                         <Image source={require('../icons/arrow.png')} style={{height:25,width:25, left:'320%', top:'28%'}}/>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card.Content>
             </Card>
 
