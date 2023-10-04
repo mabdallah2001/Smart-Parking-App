@@ -5,14 +5,13 @@ import 'firebase/compat/firestore';
 let first;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDyPPegBy9TZ61ntG23dw1dBUgoLLkwTEQ",
-  authDomain: "smart-parking-a2d54.firebaseapp.com",
-  databaseURL: "https://smart-parking-a2d54-default-rtdb.firebaseio.com",
-  projectId: "smart-parking-a2d54",
-  storageBucket: "smart-parking-a2d54.appspot.com",
-  messagingSenderId: "683598924374",
-  appId: "1:683598924374:web:7537d5e451c0e6b527c9f7",
-  measurementId: "G-0QW261KZGK"
+  apiKey: "AIzaSyA7Jk2Zl5IPdQ_gvAdaKeCEOxGWXt_qdB4",
+  authDomain: "smartattendancefireevacs-bbf5b.firebaseapp.com",
+  databaseURL: "https://smartattendancefireevacs-bbf5b.firebaseio.com",
+  projectId: "smartattendancefireevacs-bbf5b",
+  storageBucket: "smartattendancefireevacs-bbf5b.appspot.com",
+  messagingSenderId: "778020268231",
+  appId: "1:778020268231:web:e7ebb2ddc6d2fcb70a76e2",
 };
 
 let app;

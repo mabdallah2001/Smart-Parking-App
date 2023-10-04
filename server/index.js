@@ -43,6 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.post("/send-key",  async (req, res) => {
   let {email} = req.body;
   key = email;
+  console.log('key');
 });
 
 app.get("/receive-key",  async (req, res) => {

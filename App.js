@@ -3,12 +3,12 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, View , Image, LogBox} from 'react-native';
+
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import CarRegScreen from './screens/CarRegScreen';
 import HomeScreen from './screens/HomeScreen';
 import CounterScreen from './screens/CounterScreen';
-import FinesScreen from './screens/FinesScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import SComplex from './pages/SComplex';
 import StudCenter from './pages/StudCenter';
@@ -22,6 +22,7 @@ import Subscription from './pages/Subscription'
 import Funds from './pages/Funds'
 import ContactUs from './pages/ContactUs'
 import Payment from './pages/Payment'
+
 
 import {StripeProvider} from '@stripe/stripe-react-native';
 
@@ -65,29 +66,17 @@ function Home() {
         </View>
        )
      }}/>
-          <Tab.Screen name="Counter" component={CounterScreen} options={{
+          <Tab.Screen name="Office" component={CounterScreen} options={{
        tabBarIcon:({focused}) => (
         <View >
           <Image 
-            source={require('./icons/counter.png')}
+            source={require('./icons/people.png')}
             style={{tintColor: focused ? '#2C6BED' : 'gray',  width:30,
             height: 30,
             marginTop: 5,}}
           />
         
 
-        </View>
-       )
-     }}/>
-          <Tab.Screen name="Fines" component={FinesScreen} options={{
-       tabBarIcon:({focused}) => (
-        <View >
-          <Image 
-            source={require('./icons/fines.png')}
-            style={{tintColor: focused ? '#2C6BED' : 'gray',  width:30,
-            height: 30,
-            marginTop: 5,}}
-          />
         </View>
        )
      }}/>
@@ -116,9 +105,8 @@ function App() {
     
     <NavigationContainer>
       <Stack.Navigator screenOptions={globalScreenOptions}>
-        <Stack.Screen name = 'Login' component = {LoginScreen} />
-        <Stack.Screen name = 'Register' component = {RegisterScreen} />
-        <Stack.Screen name = 'Car Registeration' component = {CarRegScreen} />
+        {/* <Stack.Screen name = 'Login' component = {LoginScreen} />
+        <Stack.Screen name = 'Register' component = {RegisterScreen} /> */}
         <Stack.Screen options={{headerShown: false}} name = 'HomeNav' component = {Home} />
         <Stack.Screen name = 'Sports Complex' component = {SComplex} />
         <Stack.Screen name = 'Student Center' component = {StudCenter} />
