@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import OfficeScreen from './screens/OfficeScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import UserInfoScreen from './screens/UserInfoScreen';
 import SComplex from './pages/SComplex';
 import StudCenter from './pages/StudCenter';
 import Physics from './pages/Physics';
@@ -24,15 +25,6 @@ import Payment from './pages/Payment'
 
 
 import {StripeProvider} from '@stripe/stripe-react-native';
-
-
-
-
-
-
-
-
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -118,6 +110,7 @@ function App() {
         <Stack.Screen name = 'Subscription' component = {Subscription} />
         <Stack.Screen name = 'Funds' component = {Funds} />
         <Stack.Screen name = 'Contact' component = {ContactUs} />
+        <Stack.Screen name="UserInfo" component={UserInfoScreen} />
 
         
         <Stack.Screen name = 'Payment' component = {Payment} />

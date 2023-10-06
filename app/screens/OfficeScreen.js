@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native'; // Import ActivityIndicator for loading spinner
+import { StyleSheet, View, Text, Image, ActivityIndicator, TouchableOpacity } from 'react-native'; // Import ActivityIndicator for loading spinner
 import { db } from '../firebase';
 
-const CounterScreen = ({ navigation }) => {
+const OfficeScreen = ({ navigation }) => {
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true); // Step 1: Introduce loading state
 
@@ -83,8 +83,15 @@ const CounterScreen = ({ navigation }) => {
                     }
                 ]}
             >
-                <View style={[styles.circle, item.id === 'Guest' ? styles.blueCircle : styles.greenCircle]} />
-                <Text style={styles.text}>{item.id}</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('UserInfo', { employeeId: item.id });
+                    }}
+                    style={styles.touchableArea}
+                >
+                    <View style={[styles.circle, item.id.includes('Guest') ? styles.blueCircle : styles.greenCircle]} />
+                    <Text style={styles.text}>{item.id}</Text>
+                </TouchableOpacity>
             </View>
         );
     };
@@ -114,7 +121,7 @@ const CounterScreen = ({ navigation }) => {
     
 };
 
-export default CounterScreen;
+export default OfficeScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -130,6 +137,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 5,
+    },
+    touchableArea: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 5,  // Ensures a larger touch area
+        borderRadius: 5, // Optional: if you want rounded corners
+        // ... [any other styles you'd like for the touchable area]
     },
     circle: {
         width: 10,
