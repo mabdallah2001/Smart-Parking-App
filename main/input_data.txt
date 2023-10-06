@@ -1,0 +1,48 @@
+Scenario 1: 
+Person walks through the entrance and john doe is detected.
+John Doe has meta data: Male, Blue shirt, Black pants, Black hair, No jacket, With glasses
+john-doe
+Entrance
+Male, Blue shirt, Black pants, Black hair, No jacket, With glasses
+Scenario 2: 
+John doe is detected in the Conference
+John Doe has meta data: Male, Blue shirt, Black pants, Black hair, No jacket, With glasses
+john-doe
+Conference
+Male, Blue shirt, Black pants, Black hair, White jacket, With glasses
+Scenario 3: 
+Unidentified person detected in Office A.
+Undetected person has meta data: Male, Blue shirt, Black pants, Black hair, White jacket, With glasses
+undetected-person
+Office A
+Male, Blue shirt, Black pants, Black hair, White jacket, With glasses
+Scneario 4:
+Undetected person walks through the entrance. 
+Undetected person has metadata: Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+undetected-person
+Entrance
+Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+Scenario 5:
+Undetected person is spotted in the reception 
+Undetected person has metadata: Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+undetected-person
+Waiting Zone
+Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+Scenario 6:
+Emily Smith is detected in the Kitchen
+Emily Smith has metadata: Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+emily-smith
+Lounge
+Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+Scenario 7:
+Emily Smith is detected in the Entrance
+Emily Smith has metadata: Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+emily-smith
+Entrance
+Female, Red shirt, Brown pants, Blonde hair, Leather jacket, Without glasses
+Scenario 8:
+Undetected Person is detected in the entrance
+Undetected person has metadata: Male, Blue shirt, Black pants, Black hair, White jacket, With glasses
+undetected-person
+Entrance
+Male, Blue shirt, Black pants, Black hair, White jacket, With glasses

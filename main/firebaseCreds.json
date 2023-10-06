@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smartattendancefireevacs-bbf5b",
+  "private_key_id": "80dddd12d2c71f697ede6256fe02f49029ce2eed",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfIYH5m1QsSCCc\nYNgSPLgLrH+Lnm8ZZBw/ZhScS+to3m1p8uqomO/MxD0HxvNbzhsDQ+dcz7ZxFrej\nXuanTXrJ8n0oW6oxnRRWbhbAI7OkoMBrrGet1aMSfmEuncO1AK6lWcMFeo1Ux77C\n6jG5VD25iPTZh1UltnvcuxKB59z9PM8g5VofqWSpQNaw9a0wIaeXLDNOTmOSoAwT\nkdYRlIpjfGIzXkf0FaHz9Tb8r9viYbJlJrNzbRaSHMSBkMKbUEOpGKa/tZqiCwbG\nZaQOKFJgI8e0fqtEISJo9eDnyCO37i6rpwPUe7q1G/7Uul7CWJ8+rXC5X5Nz8WFr\nCu+sYA7HAgMBAAECggEABLuDNDYVLPNCrc5oBsr+5FB+TAnKNXGoH7gci8wYbBr7\nmxmp3HWR8HfhC38uvi266PDRwWguaGug7Xgf0ECWcB4ShX6cN30rZ0HifaTENKOs\nMRxw/oDfeo7vpLt34Sjoi11CA6W7xaaO5zdsYo/k10COYOa76ZbbPa1CETtHtp8/\naRyhu/q6PBVtlQ0kOb67K88GJ+BZqctsi69Ui0k8eyZXevF+HQmv5/xFYuWC1TEQ\nbm5ULUUqhW4jlIovEOJC4oKEyQk+HpWvNvTfysGh4T5t8/aPnbmDNRfLks5UM0/J\nJA0TG2x/qLo8ZtqNCR6WkPDLUxZ44NU9r1Ro4STGIQKBgQD1T6tcLNYXy19lZA8j\n4veOWKjqZFX7OEwA9AtgT1R1Agnq+WKY/78rHHjS8nVYTBfugvW49tgnFMet9JCN\nJVbDgbLOk08eFco/zU9B3cCBMLWg+G1NUh/WDY0OuQz4HJYLm29KkLAwfU/393IL\n77H4iYsv7kvwijMX49UqmLW0iQKBgQDo2m1njRO4pHsapqS8VpCyvqk7HozvgkcW\ntLpawY3Y5qL4pbqo9pWlUEVBM1FmuglfyV9HLSPkVFMPbV3XVg1vEWgvL1eKNVwS\nXaEco827SqF/zUkQikrLsWroineT6iw4dRrHidpxUCCJy20trkELuJETgi6IJt3e\nmli5Xz10zwKBgA1tLeDep10oCXGgN1/sdUY6PgyOL1KPs0E+Gj1MOkApO2e7/JSJ\nMupmJYrOMHQDvi+UxWQ5Rn1lGsS/pQXErGoI+ENsNqFb6fTyBMuDGp03kEleL4VS\n4GEz3quWn0oZLnE2MbIwFySgRzc4OOrEVMZYqOCXt1pUBhXhp3IsZ42ZAoGASula\noSHF4nUoFZ7fCKhgzOCB2T8u4C7tZ+Skv2XdmJY6f/vxXUJXSmPUo/E6ku3u7h3+\nxQtErMRkJGZu9kP89mqHNgbpBtG72Ty+BFS+by7HXjJQ+z1Cat2dI0rIxZFkwJUM\nFH3JBQNeNHZ5nWSeEINESR5skejPIDpPqPN29gkCgYEAu9VlqYDwDhkDEtLAtYTY\nMYes7uqUueE3J+KaJILLOQoOG/W91TViGbxho28C9ZtyCPg8FPs/td+AyabXdp+S\nUYsHRuAP6QxJ4kzimoJ23PCEfre2rqGMzq5QqHw4XvPl5qwbVC9NerEIZDryyOCI\ncFCaNCOktG5DLiUKO6xaQkU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-f20mf@smartattendancefireevacs-bbf5b.iam.gserviceaccount.com",
+  "client_id": "113546850808289829338",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-f20mf%40smartattendancefireevacs-bbf5b.iam.gserviceaccount.com"
+}
