@@ -6,9 +6,8 @@ import { StyleSheet, Text, View , Image, LogBox} from 'react-native';
 
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import CarRegScreen from './screens/CarRegScreen';
 import HomeScreen from './screens/HomeScreen';
-import CounterScreen from './screens/CounterScreen';
+import OfficeScreen from './screens/OfficeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import SComplex from './pages/SComplex';
 import StudCenter from './pages/StudCenter';
@@ -66,7 +65,7 @@ function Home() {
         </View>
        )
      }}/>
-          <Tab.Screen name="Office" component={CounterScreen} options={{
+          <Tab.Screen name="Office" component={OfficeScreen} options={{
        tabBarIcon:({focused}) => (
         <View >
           <Image 
