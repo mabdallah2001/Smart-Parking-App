@@ -25,12 +25,12 @@ def objectDetection():
     attributes = [x.strip() for x in line.split(",")]
 
     return{
-        "gender": attributes[0].lower(),
-        "shirt": attributes[1].split()[0].lower(),
-        "pants": attributes[2].split()[0].lower(),
-        "hair": attributes[3].split()[0].lower(),
-        "jacket": attributes[4].split()[0].lower(),
-        "glasses": attributes[5].split()[0].lower()
+        "gender": attributes[0],
+        "shirt": attributes[1].split()[0],
+        "pants": attributes[2].split()[0],
+        "hair": attributes[3].split()[0],
+        "jacket": attributes[4].split()[0],
+        "glasses": attributes[5].split()[0]
     }
 
  
@@ -78,7 +78,7 @@ def main():
                 db.collection('FireEvac').document(guestKey).delete()
             else:
                 timeEntered = datetime.now()
-                db.collection('FireEvac').add({'TimeEntered': timeEntered,'EmployeeID': 'Guest #' + str(guestCounter), 'Gender': metaData['gender'],'Shirt': metaData['shirt'], 'Pants':metaData['pants'], 'Hair': metaData['hair'], 'Jacket': metaData['jacket'], 'Glasses': metaData['glasses']})
+                db.collection('FireEvac').add({'Date': timeEntered,'EmployeeID': 'Guest #' + str(guestCounter), 'Gender': metaData['gender'],'Shirt': metaData['shirt'], 'Pants':metaData['pants'], 'Hair': metaData['hair'], 'Jacket': metaData['jacket'], 'Glasses': metaData['glasses']})
         else:
             for doc in docs:
                 doc_id = doc.id
@@ -124,7 +124,7 @@ def main():
             if len(docs) == 0:
                 docs = db.collection('FireEvac').where("EmployeeID", "==", employeeID).get()
                 for doc in docs:
-                    timeEntered = doc.to_dict()["TimeEntered"]
+                    timeEntered = doc.to_dict()["Date"]
                 db.collection('Attendance').add({'EmployeeID': employeeID,'Name': fname + ' ' + lname, 'Entered': timeEntered, 'Exited':""})
                
             # docs = db.collection('FireEvac').where("Name", "==", fname + ' ' + lname).where("Exited", "==", "").get()
